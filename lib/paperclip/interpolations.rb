@@ -35,7 +35,7 @@ module Paperclip
 
     # Returns the filename, the same way as ":basename.:extension" would.
     def filename attachment, style_name
-      (ext = extension(attachment, style_name)).blank? ? basename(attachment, style_name) : "#{basename(attachment, style_name)}.#{ext}"
+      "#{basename(attachment, style_name)}.#{extension(attachment, style_name)}"
     end
 
     # Returns the interpolated URL. Will raise an error if the url itself
@@ -43,6 +43,7 @@ module Paperclip
     # is used in the default :path to ease default specifications.
     RIGHT_HERE = "#{__FILE__.gsub(%r{^\./}, "")}:#{__LINE__ + 3}"
     def url attachment, style_name
+
       raise InfiniteInterpolationError if caller.any?{|b| b.index(RIGHT_HERE) }
       attachment.url(style_name, false)
     end
