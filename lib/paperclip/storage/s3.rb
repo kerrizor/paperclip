@@ -226,7 +226,6 @@ module Paperclip
       def flush_writes #:nodoc:
         @queued_for_write.each do |style, file|
           begin
-            log("saving #{path(style)}")
             write_options = {
               :content_type => file.content_type.to_s.strip,
               :acl => (@s3_permissions[style] || @s3_permissions[:default])

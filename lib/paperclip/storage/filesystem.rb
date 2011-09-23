@@ -37,7 +37,6 @@ module Paperclip
         @queued_for_write.each do |style_name, file|
           file.close
           FileUtils.mkdir_p(File.dirname(path(style_name)))
-          log("saving #{path(style_name)}")
           begin
             FileUtils.mv(file.path, path(style_name))
           rescue SystemCallError
